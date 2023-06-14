@@ -46,6 +46,9 @@ const totalYears = inventors.reduce((total,inventors) => (total + (inventors.pas
 console.log(totalYears);
 
 
+// Array.prototype.map()
+// 6. Map the people array such that the new array consists of strings with the names formatted as "First Last", e.g., "Becker, Carl" should be mapped to "Carl Becker".
+// Hint: As a start, consider using the String.prototype.split method to "split" the string using ', ' as the separator
 
 
 const people = [
@@ -62,10 +65,12 @@ const people = [
   'Blake, William'
 ];
 
-// Array.prototype.map()
-// 6. Map the people array such that the new array consists of strings with the names formatted as "First Last", e.g., "Becker, Carl" should be mapped to "Carl Becker".
-// Hint: As a start, consider using the String.prototype.split method to "split" the string using ', ' as the separator
+const splits = people.map((i) => {
+    let els = i.split(',');
+    return `${els[1].trim()} ${els[0]}`; 
+});
 
+console.log(splits);
 
 
 
@@ -78,6 +83,14 @@ const data = [
 // 7. Count the number of instances for each of the data items. The reduce should return an object where the keys are 'car', 'truck', etc. and the values are the count.
 // Hint: Since you want to return an object, be sure to pass an empty {} for the initial value of the "accumulator".
 
+const transportation = data.reduce(function(object,item) {
+    if (!object[item]) {
+        object[item] = 0;
+    }
+    object[item]++;
+    return object;
+}, {});
+console.log(transportation);
 
 
 const devs = [
@@ -91,10 +104,13 @@ const devs = [
 // 8. Check if at least one person is 19 or older?
 // Hint: To get today's year, use the getFullYear method of new Date(), i.e., new Date().getFullYear()
 
+const isAdult = people.some(person => new Date().getFullYear() - person.year >= 19)
+console.log(isAdult);
 
 // Array.prototype.every()
 // 9. Check if everyone is 19 or older?
-
+const allAdult = people.every(person => new Date().getFullYear() - person.year >= 19)
+console.log(allAdult);
 
 
 const comments = [
@@ -108,10 +124,13 @@ const comments = [
 // Array.prototype.find()
 // 10. Find the comment with the id of 823423
 
+const comment = comments.find(comment => comment.id === 823423);
+console.log(comment);
 
 
 // Array.prototype.findIndex()
 // 11. Find the index of the comment with an id of 123523
-
+const index = comments.findIndex(comment => comment.id === 123523);
+console.log(index);
 
 
